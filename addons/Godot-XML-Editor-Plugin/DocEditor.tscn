@@ -1,0 +1,168 @@
+[gd_scene load_steps=7 format=3 uid="uid://dmjsch7e1kem6"]
+
+[ext_resource type="Script" path="res://addons/XMLDocEditor/DocEditor.gd" id="1_gbkrs"]
+[ext_resource type="FontFile" uid="uid://dfxh2thm2w54m" path="res://assets/fonts/nunito/Nunito-Regular.ttf" id="2_6v5y8"]
+[ext_resource type="FontFile" uid="uid://dtwlrwpp26in5" path="res://assets/fonts/nunito/Nunito-ExtraBold.ttf" id="3_mima6"]
+[ext_resource type="FontFile" uid="uid://d4bxrgr6ctiw4" path="res://assets/fonts/nunito/Nunito-Italic.ttf" id="4_d16f2"]
+[ext_resource type="FontFile" uid="uid://4sct4e5dn0is" path="res://assets/fonts/nunito/Nunito-BoldItalic.ttf" id="5_6noj0"]
+
+[sub_resource type="SystemFont" id="SystemFont_ynrgy"]
+font_names = PackedStringArray("Cascadia Code")
+
+[node name="MainScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_gbkrs")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="Menu" type="HBoxContainer" parent="Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.33
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/HBoxContainer/Menu"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 0.3
+theme_override_font_sizes/font_size = 21
+text = "Current Path:"
+vertical_alignment = 1
+
+[node name="Path" type="LineEdit" parent="Panel/MarginContainer/HBoxContainer/Menu"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.43
+theme_override_font_sizes/font_size = 21
+placeholder_text = "C:\\Select\\Path\\To\\The\\Documentation\\docs"
+editable = false
+expand_to_text_length = true
+
+[node name="SelectPath" type="Button" parent="Panel/MarginContainer/HBoxContainer/Menu"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+theme_override_font_sizes/font_size = 21
+text = "Select Path"
+
+[node name="Save" type="Button" parent="Panel/MarginContainer/HBoxContainer/Menu"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+theme_override_font_sizes/font_size = 21
+text = "Save"
+
+[node name="VBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 6.18
+
+[node name="Filelist" type="ItemList" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.75
+max_columns = 4
+
+[node name="XMLTree" type="Tree" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/draw_relationship_lines = 3
+theme_override_constants/parent_hl_line_width = 3
+theme_override_constants/outline_size = 0
+
+[node name="EditorColumn" type="VBoxContainer" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
+
+[node name="BbcodePreview" type="Window" parent="Panel/MarginContainer"]
+unique_name_in_owner = true
+position = Vector2i(200, 200)
+size = Vector2i(900, 700)
+visible = false
+transient = true
+exclusive = true
+unresizable = true
+borderless = true
+
+[node name="MarginContainer" type="VBoxContainer" parent="Panel/MarginContainer/BbcodePreview"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BbcodeRichText" type="RichTextLabel" parent="Panel/MarginContainer/BbcodePreview/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 9.04
+focus_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_6v5y8")
+theme_override_fonts/bold_font = ExtResource("3_mima6")
+theme_override_fonts/italics_font = ExtResource("4_d16f2")
+theme_override_fonts/bold_italics_font = ExtResource("5_6noj0")
+theme_override_fonts/mono_font = SubResource("SystemFont_ynrgy")
+bbcode_enabled = true
+selection_enabled = true
+
+[node name="CloseWindowButton" type="Button" parent="Panel/MarginContainer/BbcodePreview/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+text = "Close"
+
+[node name="SelectPathDialog" type="FileDialog" parent="Panel/MarginContainer"]
+unique_name_in_owner = true
+initial_position = 1
+title = "Open a Directory"
+size = Vector2i(472, 800)
+exclusive = false
+ok_button_text = "Select Current Folder"
+dialog_hide_on_ok = true
+file_mode = 2
+access = 2
+
+[connection signal="pressed" from="Panel/MarginContainer/HBoxContainer/Menu/SelectPath" to="." method="_on_select_path_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/HBoxContainer/Menu/Save" to="." method="_on_save_pressed"]
+[connection signal="visibility_changed" from="Panel/MarginContainer/BbcodePreview" to="." method="_on_bbcode_preview_visibility_changed"]
+[connection signal="pressed" from="Panel/MarginContainer/BbcodePreview/MarginContainer/CloseWindowButton" to="." method="_on_close_window_button_pressed"]
+[connection signal="close_requested" from="Panel/MarginContainer/SelectPathDialog" to="." method="_on_select_path_dialog_close_requested"]
+[connection signal="dir_selected" from="Panel/MarginContainer/SelectPathDialog" to="." method="_on_select_path_dialog_dir_selected"]
