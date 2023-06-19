@@ -1,13 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dmjsch7e1kem6"]
+[gd_scene load_steps=6 format=3 uid="uid://dmjsch7e1kem6"]
 
 [ext_resource type="Script" path="res://addons/XMLDocEditor/DocEditor.gd" id="1_gbkrs"]
 [ext_resource type="FontFile" uid="uid://dfxh2thm2w54m" path="res://assets/fonts/nunito/Nunito-Regular.ttf" id="2_6v5y8"]
 [ext_resource type="FontFile" uid="uid://dtwlrwpp26in5" path="res://assets/fonts/nunito/Nunito-ExtraBold.ttf" id="3_mima6"]
 [ext_resource type="FontFile" uid="uid://d4bxrgr6ctiw4" path="res://assets/fonts/nunito/Nunito-Italic.ttf" id="4_d16f2"]
 [ext_resource type="FontFile" uid="uid://4sct4e5dn0is" path="res://assets/fonts/nunito/Nunito-BoldItalic.ttf" id="5_6noj0"]
-
-[sub_resource type="SystemFont" id="SystemFont_ynrgy"]
-font_names = PackedStringArray("Cascadia Code")
 
 [node name="MainScreen" type="Control"]
 layout_mode = 3
@@ -138,7 +135,6 @@ theme_override_fonts/normal_font = ExtResource("2_6v5y8")
 theme_override_fonts/bold_font = ExtResource("3_mima6")
 theme_override_fonts/italics_font = ExtResource("4_d16f2")
 theme_override_fonts/bold_italics_font = ExtResource("5_6noj0")
-theme_override_fonts/mono_font = SubResource("SystemFont_ynrgy")
 bbcode_enabled = true
 selection_enabled = true
 

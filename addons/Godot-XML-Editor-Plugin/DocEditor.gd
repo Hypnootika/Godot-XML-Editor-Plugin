@@ -249,7 +249,7 @@ func _connect_signals()->void:
 
 func _on_textedit_text_changed(text_edit: TextEdit):
 	currently_selected_xml_node.content = text_edit.text
-	print(currently_selected_xml_node.content)
+
 
 func _on_bbcode_button_pressed()->void:
 	bbcode_preview.show()
