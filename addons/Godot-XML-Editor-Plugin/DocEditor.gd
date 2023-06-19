@@ -118,7 +118,7 @@ func _handle_member(xml_node: XMLNode)->void:
 		create_name_value_container(attribute_name, xml_node.attributes.get(key, ""))
 
 	create_text_edit("Description", xml_node.content)
-	create_button("Preview BBCode", _on_bbcode_button_pressed)
+
 
 func _handle_method(xml_node: XMLNode) -> void:
 	# Displaying Method name and attributes
@@ -149,9 +149,7 @@ func _handle_method(xml_node: XMLNode) -> void:
 					var attribute_name: String = pair[0]
 					var value = pair[1]
 					create_name_value_container(attribute_name, value, param_container)
-			"description":
-				create_text_edit("Description", child.content.strip_edges())
-				create_button("Preview BBCode", _on_bbcode_button_pressed)
+
 
 func _handle_signal(xml_node: XMLNode) -> void:
 	# Displaying Signal name
@@ -160,7 +158,7 @@ func _handle_signal(xml_node: XMLNode) -> void:
 	# Iterate through the children of the signal node
 	for child in xml_node.children:
 		match child.name:
-			"param":
+			"argument":
 				var param_attributes = [
 					["Index", child.attributes.get("index", "")],
 					["Name", child.attributes.get("name", "")],
@@ -172,9 +170,7 @@ func _handle_signal(xml_node: XMLNode) -> void:
 					var attribute_name: String = pair[0]
 					var value = pair[1]
 					create_name_value_container(attribute_name, value, param_container)
-			"description":
-				create_text_edit("Description", child.content.strip_edges())
-				create_button("Preview BBCode", _on_bbcode_button_pressed)
+
 
 func _handle_constant(xml_node: XMLNode) -> void:
 	# Displaying Constant attributes
@@ -188,7 +184,7 @@ func _handle_constant(xml_node: XMLNode) -> void:
 	# Displaying constant description if available
 	if xml_node.content:
 		create_text_edit("Description", xml_node.content.strip_edges())
-		create_button("Preview BBCode", _on_bbcode_button_pressed)
+
 
 # Util
 func create_name_value_container(attribute_name: String, value, parent_container: Container = editor_column)->void:
@@ -218,17 +214,19 @@ func create_text_edit(label_text, content)->void:
 	text_edit.deselect_on_focus_loss_enabled = false
 	text_edit.text_changed.connect(_on_textedit_text_changed.bind(text_edit))
 	currently_selected_text_edit = text_edit
-	var bold_button: Button = create_button("Bold", _on_bold_button_pressed)
-	var italic_button: Button = create_button("Italic", _on_italic_button_pressed)	
-	var code_button:Button = create_button("Code", _on_code_button_pressed)
-	var code_block_button: Button = create_button("Codeblock", _on_codeblock_button_pressed)
-	var bb_button: Button = create_button("Preview BBcode", _on_bbcode_button_pressed)
+	var button_bar = HBoxContainer.new()
+	editor_column.add_child(button_bar)
+	var bold_button: Button = create_button("Bold", _on_bold_button_pressed,button_bar)
+	var italic_button: Button = create_button("Italic", _on_italic_button_pressed, button_bar)	
+	var code_button:Button = create_button("Code", _on_code_button_pressed, button_bar)
+	var code_block_button: Button = create_button("Codeblock", _on_codeblock_button_pressed, button_bar)
+	var bb_button: Button = create_button("Preview BBcode", _on_bbcode_button_pressed,button_bar)
 	
-func create_button(label_text: String, signal_method: Callable) -> Button:
+func create_button(label_text: String, signal_method: Callable, place) -> Button:
 	var button: Button = Button.new()
 	button.text = label_text
 	button.pressed.connect(signal_method)
-	editor_column.add_child(button)
+	place.add_child(button)
 	button.size_flags_horizontal=Control.SIZE_EXPAND
 	return button
 

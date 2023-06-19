@@ -50,8 +50,11 @@ static func _dump_node(node: XMLNode, closing: bool = false, beautify: bool = fa
 		if closing:
 			return indent_str + "</%s>%s" % [node.name, "\n"]
 		else:
+#			if node.content:
+#				return indent_str + "<%s %s>%s%s%s" % [node.name, attrstr, "\n", _beauty(node.content, indent+1), "\n"]
 			if node.content:
-				return indent_str + "<%s %s>%s%s%s" % [node.name, attrstr, "\n", _beauty(node.content, indent+1), "\n"]
+				var indented_content = _indent_content_lines(node.content, indent + 1)
+				return indent_str + "<%s %s>%s%s%s" % [node.name, attrstr, "\n", indented_content, "\n"]
 			else:
 				return indent_str + "<%s %s>%s" % [node.name, attrstr, "\n"]
 
@@ -60,6 +63,19 @@ static func _beauty(string: String, indent: int) -> String:
 	for i in range(indent):
 		indent_str += "    "
 	return indent_str + string
+
+static func _indent_string(indent: int) -> String:
+	var indent_str = ""
+	for i in range(indent):
+		indent_str += "    "
+	return indent_str
+
+static func _indent_content_lines(content: String, indent: int) -> String:
+	var lines = content.split("\n")
+	var indent_str = _indent_string(indent)
+	for i in range(lines.size()):
+		lines[i] = indent_str + lines[i].strip_edges(true, false)
+	return "\n".join(lines)
 
 static func _parse(xml: PackedByteArray) -> XMLDocument:
 	var doc: XMLDocument = XMLDocument.new()
