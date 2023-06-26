@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dmjsch7e1kem6"]
 
-[ext_resource type="Script" path="res://addons/XMLDocEditor/DocEditor.gd" id="1_gbkrs"]
+[ext_resource type="Script" path="res://addons/Godot-XML-Editor-Plugin/DocEditor.gd" id="1_jmi6w"]
 [ext_resource type="FontFile" uid="uid://dfxh2thm2w54m" path="res://assets/fonts/nunito/Nunito-Regular.ttf" id="2_6v5y8"]
 [ext_resource type="FontFile" uid="uid://dtwlrwpp26in5" path="res://assets/fonts/nunito/Nunito-ExtraBold.ttf" id="3_mima6"]
 [ext_resource type="FontFile" uid="uid://d4bxrgr6ctiw4" path="res://assets/fonts/nunito/Nunito-Italic.ttf" id="4_d16f2"]
@@ -15,7 +15,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource("1_gbkrs")
+script = ExtResource("1_jmi6w")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1

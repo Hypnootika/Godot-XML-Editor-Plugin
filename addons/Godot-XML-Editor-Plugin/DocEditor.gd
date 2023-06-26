@@ -158,7 +158,7 @@ func _handle_signal(xml_node: XMLNode) -> void:
 	# Iterate through the children of the signal node
 	for child in xml_node.children:
 		match child.name:
-			"argument":
+			"param":
 				var param_attributes = [
 					["Index", child.attributes.get("index", "")],
 					["Name", child.attributes.get("name", "")],

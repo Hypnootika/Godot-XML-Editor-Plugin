@@ -45,7 +45,7 @@ static func _dump_node(node: XMLNode, closing: bool = false, beautify: bool = fa
 		indent_str += "    "
 
 	if node.standalone:
-		return indent_str + "<%s %s />%s" % [node.name, attrstr, "\n"]
+		return indent_str + "<%s/>%s" % [node.name, "\n"]
 	else:
 		if closing:
 			return indent_str + "</%s>%s" % [node.name, "\n"]
@@ -54,9 +54,13 @@ static func _dump_node(node: XMLNode, closing: bool = false, beautify: bool = fa
 #				return indent_str + "<%s %s>%s%s%s" % [node.name, attrstr, "\n", _beauty(node.content, indent+1), "\n"]
 			if node.content:
 				var indented_content = _indent_content_lines(node.content, indent + 1)
-				return indent_str + "<%s %s>%s%s%s" % [node.name, attrstr, "\n", indented_content, "\n"]
+				return indent_str + "<%s>%s%s%s" % [node.name, "\n", indented_content, "\n"]
 			else:
-				return indent_str + "<%s %s>%s" % [node.name, attrstr, "\n"]
+				if node.name == "description" or node.name == "tutorials" or node.name == "methods" or node.name == "signals" or node.name == "brief_description" or node.name == "members" or node.name == "constants":
+					return indent_str + "<%s>%s" % [node.name,"\n"]
+				return indent_str + "<%s %s>%s" % [node.name,attrstr,"\n"]
+
+			
 
 static func _beauty(string: String, indent: int) -> String:
 	var indent_str = ""

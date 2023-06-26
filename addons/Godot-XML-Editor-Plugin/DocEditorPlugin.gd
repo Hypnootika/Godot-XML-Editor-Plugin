@@ -1,7 +1,7 @@
 @tool
 extends EditorPlugin
 
-const MainScreen = preload("res://addons/XMLDocEditor/DocEditor.tscn")
+const MainScreen = preload("res://addons/Godot-XML-Editor-Plugin/DocEditor.tscn")
 var main_screen_instance
 
 func _enter_tree():
